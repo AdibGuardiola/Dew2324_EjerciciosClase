@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora en Ventana Flotante</title>
+    <style>
+      .window {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        width: 200px; /* Modifica el ancho de la ventana flotante */
+        height: 320px; /* Modifica la altura de la ventana flotante */
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .calculator-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        color: red;
+      }
+
+      .calculator-button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        margin: 5px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+      }
+
+      .number-button {
+        background-color: #4caf50;
+        color: #fff;
+      }
+
+      .operator-button {
+        background-color: #2196f3;
+        color: #fff;
+      }
+
+      .equals-button {
+        background-color: #ff9800;
+        color: #fff;
+      }
+
+      .calculator-button:active {
+        background-color: #240404;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="window" id="calculatorWindow">
+      <input
+        type="text"
+        id="display"
+        readonly
+        style="
+          margin-bottom: 10px;
+          width: 100%;
+          height: 40px;
+          font-size: 18px;
+          padding: 5px;
+        "
+      /><br />
+      <div class="calculator-buttons">
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('1')"
+        >
+          1
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('2')"
+        >
+          2
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('3')"
+        >
+          3
+        </div>
+        <div
+          class="calculator-button operator-button"
+          onclick="appendToDisplay('+')"
+        >
+          +
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('4')"
+        >
+          4
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('5')"
+        >
+          5
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('6')"
+        >
+          6
+        </div>
+        <div
+          class="calculator-button operator-button"
+          onclick="appendToDisplay('-')"
+        >
+          -
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('7')"
+        >
+          7
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('8')"
+        >
+          8
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('9')"
+        >
+          9
+        </div>
+        <div
+          class="calculator-button operator-button"
+          onclick="appendToDisplay('*')"
+        >
+          *
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('0')"
+        >
+          0
+        </div>
+        <div
+          class="calculator-button number-button"
+          onclick="appendToDisplay('.')"
+        >
+          .
+        </div>
+        <div
+          class="calculator-button operator-button"
+          onclick="appendToDisplay('/')"
+        >
+          /
+        </div>
+        <div class="calculator-button" onclick="clearDisplay()">C</div>
+        <div
+          class="calculator-button equals-button"
+          onclick="calculateResult()"
+        >
+          =
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let offsetX,
+        offsetY,
+        isDragging = false;
+      let calculatorWindow = document.getElementById("calculatorWindow");
+
+      calculatorWindow.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - calculatorWindow.getBoundingClientRect().left;
+        offsetY = e.clientY - calculatorWindow.getBoundingClientRect().top;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          calculatorWindow.style.left = e.clientX - offsetX + "px";
+          calculatorWindow.style.top = e.clientY - offsetY + "px";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+
+      function appendToDisplay(value) {
+        document.getElementById("display").value += value;
+      }
+
+      function clearDisplay() {
+        document.getElementById("display").value = "";
+      }
+
+      function calculateResult() {
+        try {
+          let result = eval(document.getElementById("display").value);
+          document.getElementById("display").value = result;
+        } catch (error) {
+          document.getElementById("display").value = "Error";
+        }
+      }
+    </script>
+  </body>
+</html>

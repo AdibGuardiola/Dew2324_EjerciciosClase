@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pelota Rebotando</title>
+    <style>
+      #contenedor {
+        position: relative;
+        width: 600px;
+        height: 500px;
+        border: 1px solid #000;
+        overflow: hidden;
+      }
+
+      #pelota {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contenedor">
+      <div id="pelota"></div>
+    </div>
+    <button id="botonRapido">+</button>
+    <button id="botonLento">-</button>
+    <script>
+      const contenedor = document.getElementById("contenedor");
+      const pelota = document.getElementById("pelota");
+      const botonRapido = document.getElementById("botonRapido");
+      const botonLento = document.getElementById("botonLento");
+
+      let posX = 0;
+      let posY = 0;
+      let velocidadX = 1;
+      let velocidadY = 1;
+
+      function moverPelota() {
+        posX += velocidadX;
+        posY += velocidadY;
+
+        const limiteDerecho = contenedor.clientWidth - pelota.clientWidth;
+        const limiteInferior = contenedor.clientHeight - pelota.clientHeight;
+
+        if (posX > limiteDerecho || posX < 0) {
+          velocidadX *= -1;
+        }
+
+        if (posY > limiteInferior || posY < 0) {
+          velocidadY *= -1;
+        }
+
+        pelota.style.left = posX + "px";
+        pelota.style.top = posY + "px";
+      }
+
+      setInterval(moverPelota, 5);
+
+      // Función para aumentar la velocidad
+      botonRapido.addEventListener("click", () => {
+        velocidadX *= 2;
+        velocidadY *= 2;
+      });
+
+      // Función para reducir la velocidad
+      botonLento.addEventListener("click", () => {
+        velocidadX /= 2;
+        velocidadY /= 2;
+      });
+    </script>
+  </body>
+</html>

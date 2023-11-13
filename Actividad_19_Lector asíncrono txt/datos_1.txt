@@ -1,0 +1,40 @@
+1, Juan Pérez, Ventas
+2, María González, Marketing
+3, Carlos Rodríguez, Finanzas
+4, Laura Martínez, Recursos Humanos
+5, Andrés López, Desarrollo
+6, Ana García, Ventas
+7, Javier Fernández, Desarrollo
+8, Carolina Ramírez, Marketing
+9, Miguel Sánchez, Finanzas
+10, Paula Díaz, Recursos Humanos
+11, Luis Torres, Desarrollo
+12, Sofía Ruiz, Ventas
+13, Diego Herrera, Marketing
+14, Elena Vargas, Finanzas
+15, Raúl Castro, Recursos Humanos
+16, Marta Jiménez, Desarrollo
+17, Alejandro Navarro, Ventas
+18, Patricia Silva, Marketing
+19, Sergio Gómez, Finanzas
+20, Carmen Reyes, Recursos Humanos
+21, Raquel Ortega, Desarrollo
+22, Daniel Molina, Ventas
+23, Isabel Medina, Marketing
+24, Raúl López, Finanzas
+25, Carmen Serrano, Recursos Humanos
+26, Adrián Morales, Desarrollo
+27, Beatriz Cordero, Ventas
+28, Víctor Ramos, Marketing
+29, Julia Santos, Finanzas
+30, Marcos Vega, Recursos Humanos
+31, Teresa Mendoza, Desarrollo
+32, Juan Carlos Pérez, Ventas
+33, Laura Flores, Marketing
+34, Javier Soto, Finanzas
+35, Carolina Gutiérrez, Recursos Humanos
+36, Sergio Martínez, Desarrollo
+37, Claudia Ruiz, Ventas
+38, Eduardo Castro, Marketing
+39, Lucía Rodríguez, Finanzas
+40, Raúl Morales, Recursos Humanos

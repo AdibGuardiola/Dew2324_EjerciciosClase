@@ -1,0 +1,131 @@
+.contenedor {
+  /* position: absolute; */
+  width: 25%; /* 100% del ancho de la ventana */
+  height: 90vh; /* 100% de la altura de la ventana */
+  border: 1px solid #080808;
+  background: url("images/pastel.png");
+  /* display:flex; */
+
+  display: flex;
+  flex-direction: column;
+  margin-left: 500px;
+  /* transform: translate(-50%, -50%); */
+  border-radius: 5%;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 15px;
+
+  font-family: "Waltograph UI", sans-serif;
+  color: #0e0d0d; /* Color rojo para el texto (puedes cambiar el código de color según tus preferencias) */
+  text-align: center;
+
+  .contenedor .ciudad {
+    padding: 30px;
+  }
+
+  .contenedor .ciudad p.ciudad {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .content-g102 {
+    display: flex;
+  }
+}
+
+.g102 {
+  width: 40%;
+  max-width: 400px;
+  margin-left: auto; /* Establece el margen izquierdo a 'auto' para centrar horizontalmente */
+  margin-right: auto;
+
+  color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ce0808;
+
+  background: url("images/bosque.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: black;
+}
+
+.g102body {
+  width: 100%;
+  height: 0;
+  padding-bottom: 50%;
+  background: rgb(162, 130, 238);
+  position: relative;
+  border-top-left-radius: 100% 200%;
+  border-top-right-radius: 100% 200%;
+  overflow: hidden;
+  margin-right: -10px;
+  border-color: rgb(65, 19, 19);
+
+  font-family: "Waltograph", sans-serif;
+  /* Resto de tus estilos aquí */
+}
+
+.g102.temperatura .g102body {
+  background: rgb(238, 130, 130);
+}
+
+.g102fill {
+  position: absolute;
+  top: 100%;
+  left: 0%;
+  width: inherit;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+
+  transform-origin: center top;
+  transform: rotate(0.25 turn);
+  transition: transform 0.2s ease-out;
+}
+
+.g102.temperatura .g102fill {
+  background: url("images/Trevol.png");
+  background-size: 23%;
+}
+
+.g102.humedad .g102fill {
+  background: url("images/hielo.png");
+  background-size: 20%;
+}
+
+.g102cover {
+  width: 75%;
+  height: 150%;
+  background: url("images/fuego.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 25%;
+  box-sizing: border-box;
+  font-size: 40px; /* Cambia "12px" al tamaño de fuente que desees */
+  color: black;
+}
+
+.g102.temperatura .g102cover {
+  background: url("images/fuego.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.g102.humedad .g102cover {
+  background: url("images/cubosdehielo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content-info {
+  font-size: 10px;
+}

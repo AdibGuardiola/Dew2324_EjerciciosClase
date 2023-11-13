@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía Virtual La Noria</title>
+  </head>
+
+  <body>
+    <div id="formulario">
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" min="3" max="99" />
+      <br />
+      <label for="altura">Altura (cm):</label>
+      <input type="number" id="altura" min="90" max="250" />
+      <br />
+      <button id="crearRutaBtn">Crea mi ruta</button>
+    </div>
+
+    <div id="guia"></div>
+
+    <script>
+      document
+        .getElementById("crearRutaBtn")
+        .addEventListener("click", function () {
+          const edad = parseInt(document.getElementById("edad").value);
+          const altura = parseInt(document.getElementById("altura").value);
+
+          if (isNaN(edad) || isNaN(altura)) {
+            alert("Por favor, introduce valores válidos para Edad y Altura.");
+          } else {
+            const cargarAtracciones = async () => {
+              try {
+                const respuesta = await fetch("ruta.json");
+                const data = await respuesta.json();
+                const atraccionesFiltradas = verificarAtracciones(
+                  data,
+                  edad,
+                  altura
+                );
+                mostrarAtracciones(atraccionesFiltradas);
+              } catch (error) {
+                console.error("Error al cargar datos: ", error);
+              }
+            };
+            function verificarAtracciones(atracciones, edad, altura) {
+              const atraccionesDisponibles = atracciones.filter((atraccion) => {
+                const cumpleEdad =
+                  atraccion.edadMinima <= edad &&
+                  (!atraccion.edad_maxima || edad <= atraccion.edad_maxima);
+                const cumpleAltura =
+                  !atraccion.alturaMinima ||
+                  (altura &&
+                    altura >= atraccion.alturaMinima &&
+                    (!atraccion.alturaMaxima ||
+                      altura <= atraccion.alturaMaxima));
+
+                return cumpleEdad && cumpleAltura;
+              });
+
+              return atraccionesDisponibles;
+            }
+
+            function mostrarAtracciones(atracciones) {
+              const guiaDiv = document.getElementById("guia");
+              guiaDiv.innerHTML = "";
+
+              if (atracciones.length === 0) {
+                guiaDiv.textContent =
+                  "No hay atracciones disponibles para los criterios seleccionados.";
+              } else {
+                const lista = document.createElement("ul");
+                atracciones.forEach((atraccion) => {
+                  const listItem = document.createElement("li");
+                  listItem.innerHTML = `<strong>${atraccion.nombre}</strong>: ${atraccion.descripcion}`;
+                  lista.appendChild(listItem);
+                });
+                guiaDiv.appendChild(lista);
+              }
+            }
+
+            cargarAtracciones();
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+[
+    {"nombre": "Luis", "edad": 15, "altura": 100},
+    {"nombre": "María", "edad": 12, "altura": 120},
+    {"nombre": "Carlos", "edad": 13, "altura": 90},
+    {"nombre": "Eduardo", "edad": 13, "altura": 90}  ,
+    {"nombre": "Jose", "edad": 13, "altura": 90}  ,
+    {"nombre": "Miguel", "edad": 13, "altura": 180}  ,
+    {"nombre": "Lourdes", "edad": 23, "altura": 179}  ,
+    {"nombre": "Marta", "edad": 17, "altura": 210}  ,
+    {"nombre": "Eduardo", "edad": 14, "altura": 90}  ,
+    {"nombre": "Laura", "edad": 15, "altura": 180}  
+
+  ]
+  

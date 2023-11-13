@@ -1,0 +1,94 @@
+.content-gauge {
+    display: flex;
+}
+
+.gauge{
+    width: 100%;
+    max-width: 250px;
+    font-family: 'Robot',sans-serif;
+    font-size: 32px;
+    color:aquamarine
+    
+    }
+
+
+
+
+
+
+
+
+.gaugebody{
+
+width: 100%;
+height: 0;
+padding-bottom: 50%;
+background: #b4c0be;
+position: relative;
+border-top-left-radius: 100% 200%;
+border-top-right-radius: 100% 200%;
+overflow: hidden;
+
+
+    
+}
+
+
+
+.gaugefill{
+
+position:absolute;
+top:100%;
+left: 0%;
+width: inherit;
+height: 100%;
+background: black;
+transform-origin: center top;
+transform:  rotate(0.25 turn);
+transition: transform 0.2s ease-out; 
+
+
+
+
+}
+
+.gauge.temperatura .gaugefill{
+
+    background: black;
+    
+    
+    
+    
+    }
+
+    .gauge.humedad .gaugefill{
+
+        background: blue;
+        
+        
+        
+        
+        }
+
+.gaugecover{
+width: 75%;
+height: 150%;
+background: white;
+border-radius: 50%;
+position: absolute;
+top: 25%;
+left: 50%;
+transform: translateX(-50%);
+
+
+display:flex;
+align-items: center;
+justify-content: center;
+padding-bottom: 25%;
+box-sizing: border-box;
+
+
+}
+
+
+

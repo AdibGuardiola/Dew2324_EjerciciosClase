@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+  display: grid;
+
+  gap: 10px; /* Espacio entre las celdas */
+}
+
+.nombre,
+.edad,
+.puestodetrabajo,
+.localizacion {
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  background-color: #3498db;
+  border: 1px solid #2980b9;
+}
+
+button {
+  grid-column: span 2; /* Hace que el botón ocupe dos columnas */
+  cursor: pointer;
+}

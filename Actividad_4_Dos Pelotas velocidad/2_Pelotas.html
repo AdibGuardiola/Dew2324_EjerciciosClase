@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pelotas que Chocan</title>
+    <style>
+      .contenedor {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        border: 1px solid black;
+        overflow: hidden;
+      }
+
+      .pelota {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+      }
+
+      .pelota.roja {
+        background-color: red;
+      }
+
+      .pelota.azul {
+        background-color: blue;
+      }
+
+      .controls {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor">
+      <div
+        class="pelota roja"
+        id="pelotaRoja"
+        style="left: 50px; top: 100px"
+      ></div>
+      <div
+        class="pelota azul"
+        id="pelotaAzul"
+        style="left: 200px; top: 50px"
+      ></div>
+    </div>
+
+    <div class="controls">
+      <button onclick="aumentarVelocidadRoja()">Aumentar Velocidad Roja</button>
+      <button onclick="disminuirVelocidadRoja()">
+        Disminuir Velocidad Roja
+      </button>
+      <button onclick="aumentarVelocidadAzul()">Aumentar Velocidad Azul</button>
+      <button onclick="disminuirVelocidadAzul()">
+        Disminuir Velocidad Azul
+      </button>
+    </div>
+
+    <script>
+      const pelotas = {
+        pelotaRoja: document.getElementById("pelotaRoja"),
+        pelotaAzul: document.getElementById("pelotaAzul"),
+      };
+
+      let velocidades = {
+        pelotaRoja: { x: 3, y: 3 },
+        pelotaAzul: { x: -3, y: -3 },
+      };
+
+      const factorAumentoVelocidad = 1.2; // Puedes ajustar este factor según sea necesario
+
+      function aumentarVelocidadRoja() {
+        velocidades.pelotaRoja.x *= factorAumentoVelocidad;
+        velocidades.pelotaRoja.y *= factorAumentoVelocidad;
+      }
+
+      function disminuirVelocidadRoja() {
+        velocidades.pelotaRoja.x /= factorAumentoVelocidad;
+        velocidades.pelotaRoja.y /= factorAumentoVelocidad;
+      }
+
+      function aumentarVelocidadAzul() {
+        velocidades.pelotaAzul.x *= factorAumentoVelocidad;
+        velocidades.pelotaAzul.y *= factorAumentoVelocidad;
+      }
+
+      function disminuirVelocidadAzul() {
+        velocidades.pelotaAzul.x /= factorAumentoVelocidad;
+        velocidades.pelotaAzul.y /= factorAumentoVelocidad;
+      }
+
+      function moverPelotas() {
+        Object.keys(pelotas).forEach((pelotaId) => {
+          let posX = parseInt(pelotas[pelotaId].style.left) || 0;
+          let posY = parseInt(pelotas[pelotaId].style.top) || 0;
+
+          posX += velocidades[pelotaId].x;
+          posY += velocidades[pelotaId].y;
+
+          const limiteDerecho =
+            document.querySelector(".contenedor").clientWidth -
+            pelotas[pelotaId].clientWidth;
+          const limiteInferior =
+            document.querySelector(".contenedor").clientHeight -
+            pelotas[pelotaId].clientHeight;
+
+          if (posX > limiteDerecho) {
+            velocidades[pelotaId].x = -Math.abs(velocidades[pelotaId].x);
+          } else if (posX < 0) {
+            velocidades[pelotaId].x = Math.abs(velocidades[pelotaId].x);
+          }
+
+          if (posY > limiteInferior) {
+            velocidades[pelotaId].y = -Math.abs(velocidades[pelotaId].y);
+          } else if (posY < 0) {
+            velocidades[pelotaId].y = Math.abs(velocidades[pelotaId].y);
+          }
+
+          pelotas[pelotaId].style.left = posX + "px";
+          pelotas[pelotaId].style.top = posY + "px";
+        });
+
+        // Verificar colisión entre pelotas y cambiar direcciones
+        const distancia = Math.sqrt(
+          Math.pow(
+            pelotas["pelotaRoja"].offsetLeft - pelotas["pelotaAzul"].offsetLeft,
+            2
+          ) +
+            Math.pow(
+              pelotas["pelotaRoja"].offsetTop - pelotas["pelotaAzul"].offsetTop,
+              2
+            )
+        );
+
+        if (distancia <= 50) {
+          velocidades["pelotaRoja"].x *= -1;
+          velocidades["pelotaRoja"].y *= -1;
+          velocidades["pelotaAzul"].x *= -1;
+          velocidades["pelotaAzul"].y *= -1;
+        }
+      }
+
+      setInterval(moverPelotas, 10);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: white;
+        text-align: center;
+      }
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: blue;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .task-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .task-item input[type="checkbox"] {
+        margin-right: 10px;
+      }
+      .completed {
+        text-decoration: line-through;
+        color: #999;
+      }
+      .delete-btn {
+        background-color: #ff5252;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Lista de Tareas</h2>
+      <div id="task-list"></div>
+      <div>
+        <input type="text" id="new-task" placeholder="Nueva tarea" />
+        <button onclick="addTask()">Agregar tarea</button>
+      </div>
+      <button onclick="deleteCompletedTasks()">
+        Eliminar tareas completadas
+      </button>
+    </div>
+
+    <script>
+      function addTask() {
+        const taskText = document.getElementById("new-task").value;
+        if (taskText.trim() === "") {
+          alert("Por favor, ingresa una tarea válida.");
+          return;
+        }
+
+        const taskList = document.getElementById("task-list");
+        const taskItem = document.createElement("div");
+        taskItem.className = "task-item";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        const taskTextElement = document.createElement("span");
+        taskTextElement.textContent = taskText;
+
+        checkbox.addEventListener("change", function () {
+          if (checkbox.checked) {
+            taskTextElement.classList.add("completed");
+          } else {
+            taskTextElement.classList.remove("completed");
+          }
+        });
+
+        taskItem.appendChild(checkbox);
+        taskItem.appendChild(taskTextElement);
+        taskList.appendChild(taskItem);
+
+        document.getElementById("new-task").value = "";
+      }
+
+      function deleteCompletedTasks() {
+        const taskItems = document.querySelectorAll(".task-item");
+        taskItems.forEach(function (taskItem) {
+          const checkbox = taskItem.querySelector("input[type='checkbox']");
+          if (checkbox.checked) {
+            taskItem.remove();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

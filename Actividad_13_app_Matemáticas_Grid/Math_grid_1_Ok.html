@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora y Graficador</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .section {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .input-box {
+        margin-bottom: 10px;
+      }
+
+      canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="section">
+        <div class="input-box">
+          <label for="a">a:</label>
+          <input type="number" id="a1" />
+        </div>
+        <div class="input-box">
+          <label for="b">b:</label>
+          <input type="number" id="b1" />
+        </div>
+        <div class="input-box">
+          <label for="c">c:</label>
+          <input type="number" id="c1" />
+        </div>
+        <button onclick="resolverEcuacion()">Resolver</button>
+        <p id="resultado1"></p>
+      </div>
+      <script src="parabolica.js"></script>
+      <canvas id="grafica1" width="300" height="300"></canvas>
+
+      <div class="section">
+        <div class="input-box">
+          <label for="a">a1:</label>
+          <input type="number" id="a2" />
+        </div>
+        <div class="input-box">
+          <label for="b">b1:</label>
+          <input type="number" id="b2" />
+        </div>
+        <div class="input-box">
+          <label for="c">c1:</label>
+          <input type="number" id="c2" />
+        </div>
+        <div class="input-box">
+          <label for="a">a2:</label>
+          <input type="number" id="a3" />
+        </div>
+        <div class="input-box">
+          <label for="b">b2:</label>
+          <input type="number" id="b3" />
+        </div>
+        <div class="input-box">
+          <label for="c">c2:</label>
+          <input type="number" id="c3" />
+        </div>
+        <button onclick="resolverSistema()">Resolver</button>
+        <p id="resultado2"></p>
+      </div>
+      <canvas id="grafica2" width="300" height="300"></canvas>
+    </div>
+
+    <script>
+      function resolverEcuacion() {
+        var a = parseFloat(document.getElementById("a1").value);
+        var b = parseFloat(document.getElementById("b1").value);
+        var c = parseFloat(document.getElementById("c1").value);
+
+        var discriminante = Math.pow(b, 2) - 4 * a * c;
+        var x1, x2;
+
+        if (discriminante > 0) {
+          x1 = (-b + Math.sqrt(discriminante)) / (2 * a);
+          x2 = (-b - Math.sqrt(discriminante)) / (2 * a);
+          document.getElementById("resultado1").textContent =
+            "x1 = " + x1.toFixed(4) + ", x2 = " + x2.toFixed(4);
+        } else if (discriminante === 0) {
+          x1 = -b / (2 * a);
+          document.getElementById("resultado1").textContent =
+            "x = " + x1.toFixed(4);
+        } else {
+          document.getElementById("resultado1").textContent =
+            "La ecuación no tiene soluciones reales";
+        }
+
+        dibujarGrafica(a, b, c, "grafica1");
+      }
+
+      function resolverSistema() {
+        var a1 = parseFloat(document.getElementById("a2").value);
+        var b1 = parseFloat(document.getElementById("b2").value);
+        var c1 = parseFloat(document.getElementById("c2").value);
+        var a2 = parseFloat(document.getElementById("a3").value);
+        var b2 = parseFloat(document.getElementById("b3").value);
+        var c2 = parseFloat(document.getElementById("c3").value);
+
+        var determinante = a1 * b2 - a2 * b1;
+
+        if (determinante !== 0) {
+          var x = (c1 * b2 - c2 * b1) / determinante;
+          var y = (a1 * c2 - a2 * c1) / determinante;
+          document.getElementById("resultado2").textContent =
+            "x = " + x.toFixed(4) + ", y = " + y.toFixed(4);
+        } else {
+          document.getElementById("resultado2").textContent =
+            "El sistema no tiene solución única";
+        }
+
+        dibujarGraficaSistema(a1, b1, c1, a2, b2, c2, "grafica2");
+      }
+
+      function dibujarGrafica(a, b, c, canvasId) {
+        var canvas = document.getElementById(canvasId);
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Dibujar ejes X e Y
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Dibujar la parábola
+        ctx.beginPath();
+        for (var x = -canvas.width / 2; x <= canvas.width / 2; x += 0.1) {
+          var y = a * Math.pow(x, 2) + b * x + c;
+          // Invertir el eje y porque en el canvas, el origen está en la esquina superior izquierda
+          ctx.lineTo(canvas.width / 2 + x * 20, canvas.height / 2 - y * 20);
+        }
+        ctx.strokeStyle = "#e74c3c"; // Color de la parábola
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      function dibujarGraficaSistema(a1, b1, c1, a2, b2, c2, canvasId) {
+        var canvas = document.getElementById(canvasId);
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Dibujar ejes X e Y
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.strokeStyle = "#000";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Calcular puntos de intersección
+        var determinante = a1 * b2 - a2 * b1;
+        if (determinante !== 0) {
+          var xInterseccion = (b2 * c1 - b1 * c2) / determinante;
+          var yInterseccion = (a1 * c2 - a2 * c1) / determinante;
+
+          // Dibujar las rectas solo si los puntos de intersección están dentro del lienzo
+          if (
+            xInterseccion >= -canvas.width / 2 &&
+            xInterseccion <= canvas.width / 2 &&
+            yInterseccion >= -canvas.height / 2 &&
+            yInterseccion <= canvas.height / 2
+          ) {
+            // Calcular los puntos para las rectas
+            var x1 = -canvas.width / 2;
+            var y1 = (c1 - a1 * x1) / b1;
+
+            var x2 = canvas.width / 2;
+            var y2 = (c1 - a1 * x2) / b1;
+
+            var x3 = -canvas.width / 2;
+            var y3 = (c2 - a2 * x3) / b2;
+
+            var x4 = canvas.width / 2;
+            var y4 = (c2 - a2 * x4) / b2;
+
+            // Dibujar la primera recta
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2 + x1 * 20, canvas.height / 2 - y1 * 20);
+            ctx.lineTo(canvas.width / 2 + x2 * 20, canvas.height / 2 - y2 * 20);
+            ctx.strokeStyle = "#3498db";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Dibujar la segunda recta
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2 + x3 * 20, canvas.height / 2 - y3 * 20);
+            ctx.lineTo(canvas.width / 2 + x4 * 20, canvas.height / 2 - y4 * 20);
+            ctx.strokeStyle = "#e74c3c";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Dibujar el punto de intersección
+            ctx.beginPath();
+            ctx.arc(
+              canvas.width / 2 + xInterseccion * 20,
+              canvas.height / 2 - yInterseccion * 20,
+              5,
+              0,
+              2 * Math.PI
+            );
+            ctx.fillStyle = "#e74c3c"; // Color del punto de intersección
+            ctx.fill();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

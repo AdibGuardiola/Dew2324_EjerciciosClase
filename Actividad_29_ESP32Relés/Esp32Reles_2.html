@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Relés y Sensores</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        background-color: #f7f7f7;
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .rele-btn-group {
+        margin: 10px;
+      }
+
+      .rele-btn {
+        font-size: 18px;
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+
+      .rele-btn:hover {
+        background-color: #45a049;
+      }
+
+      #temperatura,
+      #humedad,
+      #distancia {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Control de Relés y Sensores</h1>
+      <div class="rele-btn-group">
+        <button class="rele-btn" onclick="toggleRelay(1, 'encender')">
+          Apagar Relé 1
+        </button>
+        <button class="rele-btn" onclick="toggleRelay(1, 'apagar')">
+          Encender Relé 1
+        </button>
+      </div>
+      <div class="rele-btn-group">
+        <button class="rele-btn" onclick="toggleRelay(2, 'encender')">
+          Apagar Relé 2
+        </button>
+        <button class="rele-btn" onclick="toggleRelay(2, 'apagar')">
+          Encender Relé 2
+        </button>
+      </div>
+      <div class="rele-btn-group">
+        <button class="rele-btn" onclick="toggleRelay(3, 'encender')">
+          Apagar Relé 3
+        </button>
+        <button class="rele-btn" onclick="toggleRelay(3, 'apagar')">
+          Encender Relé 3
+        </button>
+      </div>
+      <div class="rele-btn-group">
+        <button class="rele-btn" onclick="toggleRelay(4, 'encender')">
+          Apagar Relé 4
+        </button>
+        <button class="rele-btn" onclick="toggleRelay(4, 'apagar')">
+          Encender Relé 4
+        </button>
+      </div>
+
+      <div id="temperatura">Temperatura: -- °C</div>
+      <div id="humedad">Humedad: -- %</div>
+      <div id="distancia">Distancia: -- cm</div>
+    </div>
+
+    <script>
+      async function toggleRelay(relayNumber, action) {
+        try {
+          const response = await fetch(
+            `http://192.168.1.136/rele/${relayNumber}/${action}`
+          );
+          const data = await response.text();
+          console.log(data); // Imprime el estado del relé en la consola del navegador
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      async function obtenerDistancia() {
+        try {
+          const responseDistancia = await fetch(
+            "http://192.168.1.136/distancia"
+          );
+          if (responseDistancia.ok) {
+            const dataDistancia = await responseDistancia.json();
+            console.log(dataDistancia);
+            document.getElementById("distancia").textContent =
+              "Distancia: " + dataDistancia.distancia + " cm";
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      async function actualizarDatos() {
+        try {
+          // Obtener datos de temperatura y humedad
+          const responseTemperatura = await fetch("http://192.168.1.136/datos");
+          if (responseTemperatura.ok) {
+            const dataTemperatura = await responseTemperatura.json();
+            console.log(dataTemperatura);
+            const temperatura = parseFloat(dataTemperatura.temperatura).toFixed(
+              2
+            );
+            const humedad = parseFloat(dataTemperatura.humedad).toFixed(2);
+
+            document.getElementById("temperatura").textContent =
+              "Temperatura: " + temperatura + " °C";
+            document.getElementById("humedad").textContent =
+              "Humedad: " + humedad + " %";
+          }
+
+          // Obtener datos de distancia del sensor HC-SR04
+          await obtenerDistancia();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      // Llamar a la función para actualizar datos
+      actualizarDatos();
+      setInterval(actualizarDatos, 2000);
+    </script>
+  </body>
+</html>

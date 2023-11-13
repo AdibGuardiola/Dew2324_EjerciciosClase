@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Empleados</title>
+  </head>
+  <body>
+    <ul id="employee-list"></ul>
+
+    <script>
+      // Obtén el elemento UL donde se generará la lista de empleados
+      var employeeList = document.getElementById("employee-list");
+
+      // Genera una lista de 20 elementos de ejemplo
+      for (var i = 1; i <= 20; i++) {
+        var id = i;
+        var name = "Empleado " + i;
+        var department = "Departamento " + i;
+
+        var li = document.createElement("li");
+        li.textContent =
+          "ID: " + id + ", Nombre: " + name + ", Departamento: " + department;
+        employeeList.appendChild(li);
+      }
+    </script>
+  </body>
+</html>

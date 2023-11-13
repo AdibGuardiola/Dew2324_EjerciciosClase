@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía Virtual La Noria</title>
+  </head>
+
+  <body>
+    <div id="formulario">
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" min="3" max="99" />
+      <br />
+      <label for="altura">Altura (cm):</label>
+      <input type="number" id="altura" min="90" max="250" />
+      <br />
+      <button id="crearRutaBtn">Crea mi ruta</button>
+    </div>
+
+    <div id="guia"></div>
+
+    <script>
+      document
+        .getElementById("crearRutaBtn")
+        .addEventListener("click", function () {
+          const edad = parseInt(document.getElementById("edad").value);
+          const altura = parseInt(document.getElementById("altura").value);
+          console.log(altura);
+          if (isNaN(edad) || isNaN(altura)) {
+            alert("Por favor, introduce valores válidos para Edad y Altura.");
+          } else {
+            // Realizar una petición AJAX para cargar datos desde el archivo "miruta.txt"
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "ruta.json", true);
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState == 4 && xhr.status == 200) {
+                var txt = xhr.responseText;
+                var data = JSON.parse(txt);
+                // Ahora, la variable 'data' contiene el objeto JSON con la información del archivo de texto
+                console.log(data);
+                mostrarAtracciones(verificarAtracciones(data, edad, altura)); // Puedes usar 'data' como desees en tu aplicación
+              }
+            };
+            xhr.send();
+          }
+        });
+
+      function verificarAtracciones(atracciones, edad, altura) {
+        const atraccionesDisponibles = atracciones.filter((atraccion) => {
+          if (atraccion.edadMinima <= edad) {
+            if (atraccion.alturaMinima <= altura) {
+              if (atraccion.alturaMaxima && altura <= atraccion.alturaMaxima) {
+                return true;
+              } else if (!atraccion.alturaMaxima) {
+                return true;
+              }
+            }
+          }
+          return false;
+        });
+        return atraccionesDisponibles;
+      }
+      function mostrarAtracciones(atracciones) {
+        console.log(atracciones); // Muestra las atracciones en la consola
+        const guiaDiv = document.getElementById("guia");
+        guiaDiv.innerHTML = "";
+
+        if (atracciones.length === 0) {
+          guiaDiv.textContent =
+            "No hay atracciones disponibles para los criterios seleccionados.";
+        } else {
+          const lista = document.createElement("ul");
+          atracciones.forEach((atraccion) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = atraccion.nombre;
+            lista.appendChild(listItem);
+          });
+          guiaDiv.appendChild(lista);
+        }
+      }
+    </script>
+  </body>
+</html>

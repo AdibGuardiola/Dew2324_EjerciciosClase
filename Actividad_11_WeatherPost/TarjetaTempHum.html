@@ -1,0 +1,186 @@
+<!-- //https://www.w3schools.com/code/tryit.asp?filename=FYEZXNHFVGYA&fbclid=IwAR3l9xjgHRmIoNPU_ENOTAMffXH5G00-1DG3sO-m_3gVD7dijKLeSEBymuk -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://fonts.cdnfonts.com/css/waltograph" rel="stylesheet" />
+    <title>Gráficos de Temperatura y Humedad en Forma de Donut</title>
+
+    <!-- Agrega Chart.js desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Agrega Bootstrap CSS desde un CDN -->
+    <link
+      <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css
+    "
+    />
+  </head>
+
+  <body>
+    <div class="contenedor">
+      <h1>Gráficos de Temperatura y Humedad</h1>
+      <div class="ciudad las-palmas">
+        <!-- //Grafico Temperatura -->
+        <div class="content-g102">
+          <div class="g102 temperatura">
+            <div class="g102body">
+              <div class="g102fill"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+          <!-- //Grafico Humedad -->
+          <div class="g102 humedad">
+            <div class="g102body">
+              <div class="g102fill"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+        </div>
+        <p class="ciudad"></p>
+      </div>
+
+      <div class="ciudad oslo">
+        <!-- //Grafico Temperatura -->
+        <div class="content-g102">
+          <div class="g102 temperatura">
+            <div class="g102body">
+              <div class="g102fill"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+
+          <!-- //Grafico Humedad -->
+          <div class="g102 humedad">
+            <div class="g102body">
+              <div class="g102fill"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+        </div>
+        <p class="ciudad"></p>
+      </div>
+
+      <div class="ciudad berlin">
+        <!-- //Grafico Temperatura -->
+        <div class="content-g102">
+          <div class="g102 temperatura">
+            <div class="g102body">
+              <div class="g102fill"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+          <!-- //Grafico Humedad -->
+          <div class="g102 humedad">
+            <div class="g102body">
+              <div class="g102fill"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+        </div>
+        <p class="ciudad"></p>
+      </div>
+    </div>
+
+    <script>
+      // Reemplaza 'TU_API_KEY' con tu clave de API válida de OpenWeatherMap
+      const apiKey = "a7a6acf4bb38c97fe6bfa1a3c782bd77";
+
+      // Coordenadas geográficas de Oslo
+      const osloLat = 28.0433;
+      const osloLon = -15.57623;
+
+      // Coordenadas geográficas de Las Palmas de Gran Canaria
+      const lasPalmasLat = 28.15;
+      const lasPalmasLon = -15.416667;
+
+      // Coordenadas geográficas de Las Palmas de Berlín
+      const berlinLat = 41.14961;
+      const berlinLon = -8.61099;
+
+      // Construir la URL de la API de OpenWeatherMap para Oslo
+      const osloApiUrl = {
+        url: `https://api.openweathermap.org/data/2.5/weather?lat=${osloLat}&lon=${osloLon}&appid=${apiKey}`,
+        selector: "oslo",
+      };
+
+      // Construir la URL de la API de OpenWeatherMap para Las Palmas de Gran Canaria
+      const lasPalmasApiUrl = {
+        url: `https://api.openweathermap.org/data/2.5/weather?lat=${lasPalmasLat}&lon=${lasPalmasLon}&appid=${apiKey}`,
+        selector: "las-palmas",
+      };
+      // Función para convertir Kelvin a Celsius
+
+      // Construir la URL de la API de OpenWeatherMap para Berlín
+      const berlinApiUrl = {
+        url: `https://api.openweathermap.org/data/2.5/weather?lat=${berlinLat}&lon=${berlinLon}&appid=${apiKey}`,
+        selector: "berlin",
+      };
+      // Función para convertir Kelvin a Celsius
+      function kelvinToCelsius(kelvin) {
+        return kelvin - 273.15;
+      }
+
+      [lasPalmasApiUrl, osloApiUrl, berlinApiUrl].forEach((cityApiUrl) => {
+        fetch(cityApiUrl.url)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error(
+                "No se pudo obtener la información del tiempo para Oslo."
+              );
+            }
+          })
+          .then((data) => {
+            console.log("Fetch por array: ", data);
+            // Extraer datos de temperatura y humedad de la respuesta
+
+            const selector = cityApiUrl.selector;
+            const temperaturaCelsius = kelvinToCelsius(data.main.temp);
+            const humedadRelativa = data.main.humidity;
+            console.log("selector: ", selector);
+            document.querySelector(`.${selector} p.ciudad`).textContent =
+              // ciudades[index];
+              data.name;
+
+            setg102Value(
+              document.querySelector(`.${selector} .g102.temperatura`),
+              temperaturaCelsius / 100,
+              "°C"
+            );
+            setg102Value(
+              document.querySelector(`.${selector} .g102.humedad`),
+              humedadRelativa / 100,
+              "%"
+            );
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      });
+
+      function setg102Value(g102, value, label) {
+        console.log("test", value);
+        if (value < 0 || value > 1) {
+          return;
+        }
+        console.log(g102, value, label);
+        g102.querySelector(".g102fill").style.transform = `rotate(${
+          value / 2
+        }turn)`;
+        g102.querySelector(".g102cover").textContent = `${Math.round(
+          value * 100
+        )}${label}`;
+      }
+    </script>
+  </body>
+</html>

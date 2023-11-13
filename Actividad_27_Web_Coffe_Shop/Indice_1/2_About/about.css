@@ -1,0 +1,96 @@
+@import url("http://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700&amp;display=swap");
+
+:root {
+  --main-color: #2f2721;
+  --primary-color: #d3ad7f;
+  --black: #13131a;
+  --border: 0.1rem solid rgba(255, 255, 255, 0.3);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: 0.2s linear;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
+section {
+  padding: 2rem 7%;
+}
+
+.heading {
+  text-align: center;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-size: 4rem;
+  margin-top: 5rem;
+}
+
+.about {
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  background-repeat: repeat-y;
+  background-position: center top;
+}
+
+.about .row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.about .row .image {
+  flex: 1 1 55rem;
+}
+
+.about .row .image img {
+  width: 100%;
+}
+
+.about .row .content {
+  flex: 1 1 45rem;
+  padding: 8rem;
+}
+
+.about .row .content h3 {
+  font-size: 3rem;
+  color: var(--main-color);
+}
+
+.about .row .content p {
+  font-size: 1.6rem;
+  color: #444;
+  padding: 1rem 0;
+  line-height: 1.8;
+}
+
+.line {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  width: 100px;
+  height: 3px;
+  background: var(--primary-color);
+}

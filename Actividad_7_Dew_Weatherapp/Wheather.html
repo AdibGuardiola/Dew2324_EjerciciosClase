@@ -1,0 +1,105 @@
+
+https://icon-icons.com/es/icono/lluvia-lluvia-llovizna-sol-nube-clima-pron%C3%B3stico/84357
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App del Tiempo</title>
+        <link rel="stylesheet" href="style.css">
+
+    
+</head>
+<body>
+
+    <div class="card">
+       <div class="search">
+
+        <input type="text" placeholder="enter city name" spellcheck="false">
+        <button> <img src ="images/lupa.png"></button>
+
+       </div>
+<div class="wheather">
+<img src="images/sol.png" class="wheather-icon">
+<h1 class="temp">20°c</h1>
+<h2 class="city">Las Palmas</h2>
+<div class="details">
+    <div class="col">
+        <img src="images/humedad.png">
+        <div>
+            <p class="humidity">50%</p>
+            <p>humedad</p>
+              </div>
+            <div class="col viento">
+                <img src="images/velovient.png">
+                <div>
+                    <p class="wind">120 km/h</p>
+                    <p>Velocidad del viento</p>
+                      </div>
+
+
+
+          </div>
+       </div>
+    </div>
+</div>
+
+
+
+<script>
+
+const apiKey = 'a7a6acf4bb38c97fe6bfa1a3c782bd77';
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+const searchBox= document.querySelector(".search input");
+const searchBtn= document.querySelector(".search button");
+
+async function checkWeather(city){
+
+    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+    var data = await response.json();
+     console.log(data);
+
+    
+
+   document.querySelector(".city").innerHTML=data.name;
+   document.querySelector(".temp").innerHTML=Math.round(data.main.temp) + "°c";
+   document.querySelector(".humidity").innerHTML=data.main.humidity + "%";
+   document.querySelector(".wind").innerHTML=data.wind.speed + "km/h";
+
+    const pathImages = "images/"
+
+    const weatherIcon= document.querySelector(".wheather-icon");
+   
+    if(data.weather[0].main == "Clouds"){
+        weatherIcon.src = "images/nubes.png";
+    }
+    else if(data.weather[0].main == "Clear"){
+        weatherIcon.src = "images/sol.png";
+    }
+    else if(data.weather[0].main == "Rain"){
+        weatherIcon.src = "images/lluvia.png";
+    }
+    else if(data.weather[0].main == "Drizzle"){
+        weatherIcon.src = "images/llovizna.png";
+    }
+
+
+}
+    searchBtn.addEventListener("click" , ()=>{
+        if (!searchBox.value) {
+            return alert("Introduzca una ciudad");
+        }
+          checkWeather(searchBox.value);
+
+    })
+
+    //checkWeather();
+
+</script>
+     
+
+
+
+      </body>
+</html>

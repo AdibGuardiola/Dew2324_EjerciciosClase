@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contenedor Móvil</title>
+    <style>
+      .movible {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        cursor: pointer;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contenedor" class="movible">Contenedor Móvil</div>
+
+    <script>
+      const contenedor = document.getElementById("contenedor");
+      let offsetX,
+        offsetY,
+        isDragging = false;
+
+      contenedor.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - contenedor.getBoundingClientRect().left;
+        offsetY = e.clientY - contenedor.getBoundingClientRect().top;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const x = e.clientX - offsetX;
+          const y = e.clientY - offsetY;
+          contenedor.style.left = x + "px";
+          contenedor.style.top = y + "px";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    </script>
+  </body>
+</html>

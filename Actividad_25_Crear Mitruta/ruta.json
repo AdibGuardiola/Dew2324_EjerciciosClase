@@ -1,0 +1,36 @@
+[
+  {
+    "nombre": "La Noria",
+    "descripcion": "Disfruta de las vistas en esta clásica atracción que nunca defrauda.",
+    "edadMinima": 8
+  },
+  {
+    "nombre": "La montaña rusa",
+    "descripcion": "Velocidades de vértigo en una serpenteante ruta por los misterios de la mina de McChun.",
+    "edadMinima": 12,
+    "alturaMinima": 130,
+    "alturaMaxima": 210
+  },
+  {
+    "nombre": "La casa del terror",
+    "descripcion": "Cuenta la leyenda que fantasmas de otras épocas se reúnen en esta casa para hacer pasar a sus visitantes una experiencia cercana a la muerte.",
+    "edadMinima": 12
+  },
+  {
+    "nombre": "El ascensor sube y baja",
+    "descripcion": "Hace tiempo que no pasa el revisor, por eso es que este ascensor tiene un comportamiento tan extraño, subidas accidentadas y caída libre desde más de 30 metros de altura. ¿Sube o baja? Sí, las dos cosas.",
+    "alturaMinima": 130,
+    "edadMinima": 10
+  },
+  {
+    "nombre": "FastSplash",
+    "descripcion": "¿Quieres agua? Esta montaña rusa combina velocidad, agua y mucha diversión.",
+    "edadMinima": 8
+  },
+  {
+    "nombre": "El Reino Infantil",
+    "descripcion": "Los más pequeños podrán disfrutar de un conjunto de actividades a su altura.",
+    "edadMinima": 3,
+    "edad_maxima": 12
+  }
+]

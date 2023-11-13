@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="https://fonts.cdnfonts.com/css/waltograph" rel="stylesheet" />
+    <title>Gráficos de Temperatura y Humedad en Forma de Donut</title>
+
+    <!-- Agrega Chart.js desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Agrega Bootstrap CSS desde un CDN -->
+    <link
+      <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css
+    "
+    />
+
+    <link rel="stylesheet" href="Semicirculo.css" />
+  </head>
+  <body>
+    <div class="contenedor">
+      <h1>Gráficos de Temperatura Modificable</h1>
+      <div class="ciudad las-palmas">
+        <!-- //Grafico Temperatura -->
+        <div class="content-g102">
+          <div class="g102 temperatura">
+            <div class="g102body">
+              <div class="g102fill temperatura"></div>
+              <div class="g102cover"></div>
+            </div>
+          </div>
+    
+      </div>
+
+    <button onclick="subirSemicirculo()">Subir Semicírculo</button>
+    <button onclick="bajarSemicirculo()">Bajar Semicírculo</button>
+
+    <script>
+      // JavaScript
+      let anguloSemicirculo = 0; // Valor inicial del ángulo en grados
+      const paso = 20; // Paso de incremento/decremento al hacer clic en los botones
+
+      function subirSemicirculo() {
+        if (anguloSemicirculo < 180) {
+          anguloSemicirculo += paso; // Incrementar el ángulo en 20 grados
+          actualizarAngulo();
+        }
+      }
+
+      function bajarSemicirculo() {
+        if (anguloSemicirculo > 0) {
+          anguloSemicirculo -= paso; // Disminuir el ángulo en 20 grados
+          actualizarAngulo();
+        }
+      }
+
+      function actualizarAngulo() {
+        const g102fill = document.querySelector(".g102fill");
+        const percentage = Math.round((anguloSemicirculo / 180) * 100); // Calcular porcentaje
+        g102fill.style.transform = `rotate(${anguloSemicirculo}deg)`;
+        g102fill.setAttribute("data-percentage", percentage); // Establecer el atributo de datos con el porcentaje
+        if (anguloSemicirculo >= 100) {
+          g102fill.classList.add("red");
+        } else {
+          g102fill.classList.remove("red");
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

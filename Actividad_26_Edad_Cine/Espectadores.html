@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía Virtual La Noria</title>
+  </head>
+
+  <body>
+    <div id="formulario">
+      <label for="edad">Edad Mínima:</label>
+      <input type="number" id="edad" min="3" max="99" />
+      <br />
+
+      <button id="Espectadores">Espectadores</button>
+    </div>
+
+    <div id="Edad"></div>
+
+    <script>
+      document
+        .getElementById("Espectadores")
+        .addEventListener("click", function () {
+          const edad = parseInt(document.getElementById("edad").value);
+
+          // Verificar si los valores ingresados son números válidos
+          if (isNaN(edad) || edad < 3 || edad > 99) {
+            alert("Por favor, introduce una edad válida (entre 3 y 99 años).");
+          } else {
+            // Realizar una petición AJAX para cargar datos desde el archivo "Espectadores.json"
+            const cargarEspectadores = async () => {
+              try {
+                const respuesta = await fetch("Espectadores.json");
+                const data = await respuesta.json();
+                const espectadoresFiltrados = verificarEspectadores(data, edad);
+                mostrarEspectadores(espectadoresFiltrados);
+              } catch (error) {
+                console.error("Error al cargar datos: ", error);
+              }
+            };
+
+            // Función para filtrar espectadores según la edad ingresada
+            function verificarEspectadores(espectadores, edad) {
+              return espectadores.filter(
+                (espectador) => espectador.edad > edad
+              );
+            }
+
+            // Función para mostrar los espectadores en la interfaz
+            function mostrarEspectadores(espectadores) {
+              const EdadDiv = document.getElementById("Edad");
+              EdadDiv.innerHTML = "";
+
+              if (espectadores.length === 0) {
+                EdadDiv.textContent = `No hay espectadores mayores de ${edad} años.`;
+              } else {
+                const lista = document.createElement("ul");
+                espectadores.forEach((espectador) => {
+                  const listItem = document.createElement("li");
+                  listItem.textContent = `Nombre: ${espectador.nombre}, Edad: ${espectador.edad}`;
+                  lista.appendChild(listItem);
+                });
+                EdadDiv.appendChild(lista);
+              }
+            }
+
+            // Llamar a la función para cargar y mostrar espectadores
+            cargarEspectadores();
+          }
+        });
+    </script>
+  </body>
+</html>

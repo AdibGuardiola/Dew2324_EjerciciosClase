@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos de Ratón</title>
+    <style>
+      .container {
+        display: flex;
+      }
+      .card {
+        background: blue;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        margin: 20px;
+      }
+
+      .card1 {
+        background: rgb(94, 255, 0);
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        margin: 20px;
+      }
+
+      .card2 {
+        background: rgb(255, 174, 0);
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card" id="color-change-element">
+        <p>Pasa el ratón aquí para</p>
+        <p>cambiar de color</p>
+      </div>
+      <div class="card1" id="volume-change-element">
+        Pasa el ratón aquí para aumentar el volumen
+      </div>
+      <div class="card2" id="rotate-element">
+        Pasa el ratón aquí para que gire
+      </div>
+    </div>
+
+    <script>
+      const colorChangeElement = document.getElementById(
+        "color-change-element"
+      );
+      const volumeChangeElement = document.getElementById(
+        "volume-change-element"
+      );
+      const rotateElement = document.getElementById("rotate-element");
+
+      colorChangeElement.addEventListener("mouseover", function () {
+        colorChangeElement.style.backgroundColor = "#e74c3c";
+      });
+
+      colorChangeElement.addEventListener("mouseout", function () {
+        colorChangeElement.style.backgroundColor = "blue";
+      });
+
+      volumeChangeElement.addEventListener("mouseover", function () {
+        volumeChangeElement.style.transform = "scale(1.5)";
+      });
+
+      volumeChangeElement.addEventListener("mouseout", function () {
+        volumeChangeElement.style.transform = "scale(1)";
+      });
+
+      rotateElement.addEventListener("mouseover", function () {
+        rotateElement.style.transform = "rotate(360deg)";
+        rotateElement.style.transition = "transform 0.5s";
+      });
+
+      rotateElement.addEventListener("mouseout", function () {
+        rotateElement.style.transform = "rotate(0deg)";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!-- //https://www.w3schools.com/code/tryit.asp?filename=FYEZXNHFVGYA&fbclid=IwAR3l9xjgHRmIoNPU_ENOTAMffXH5G00-1DG3sO-m_3gVD7dijKLeSEBymuk -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficos de Temperatura y Humedad en Forma de Donut</title>
+
+    <!-- Agrega Chart.js desde un CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Agrega Bootstrap CSS desde un CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="aa.css" />
+  </head>
+
+  <body>
+    <h1>Gráficos de Temperatura y Humedad</h1>
+
+    <div class="las-palmas">
+      <!-- //Grafico Temperatura -->
+      <div class="content-gauge">
+        <div class="gauge temperatura">
+          <div class="gaugebody">
+            <div class="gaugefill"></div>
+            <div class="gaugecover"></div>
+          </div>
+        </div>
+
+        <!-- //Grafico Humedad -->
+        <div class="gauge humedad">
+          <div class="gaugebody">
+            <div class="gaugefill"></div>
+            <div class="gaugecover"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-info">
+        <p class="ciudad"></p>
+        <p>Temperatura: <span class="temperatura"></span>°C</p>
+        <p>Humedad: <span class="humedad"></span>%</p>
+      </div>
+    </div>
+    <div class="oslo">
+      <!-- //Grafico Temperatura -->
+      <div class="content-gauge">
+        <div class="gauge temperatura">
+          <div class="gaugebody">
+            <div class="gaugefill"></div>
+            <div class="gaugecover"></div>
+          </div>
+        </div>
+
+        <!-- //Grafico Humedad -->
+        <div class="gauge humedad">
+          <div class="gaugebody">
+            <div class="gaugefill"></div>
+            <div class="gaugecover"></div>
+          </div>
+        </div>
+      </div>
+      <div class="content-info">
+        <p class="ciudad"></p>
+        <p>Temperatura: <span class="temperatura"></span>°C</p>
+        <p>Humedad: <span class="humedad"></span>%</p>
+      </div>
+    </div>
+
+    <script>
+      // Reemplaza 'TU_API_KEY' con tu clave de API válida de OpenWeatherMap
+      const apiKey = "a7a6acf4bb38c97fe6bfa1a3c782bd77";
+
+      // Coordenadas geográficas de Oslo
+      const osloLat = 59.91273;
+      const osloLon = 10.74609;
+
+      // Coordenadas geográficas de Las Palmas de Gran Canaria
+      const lasPalmasLat = 28.15;
+      const lasPalmasLon = -15.416667;
+
+      // Construir la URL de la API de OpenWeatherMap para Oslo
+      const osloApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${osloLat}&lon=${osloLon}&appid=${apiKey}`;
+
+      // Construir la URL de la API de OpenWeatherMap para Las Palmas de Gran Canaria
+      const lasPalmasApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lasPalmasLat}&lon=${lasPalmasLon}&appid=${apiKey}`;
+      // Función para convertir Kelvin a Celsius
+
+      function kelvinToCelsius(kelvin) {
+        return kelvin - 273.15;
+      }
+
+      // Realizar una solicitud HTTP GET a la API de OpenWeatherMap para Oslo
+      fetch(osloApiUrl)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(
+              "No se pudo obtener la información del tiempo para Oslo."
+            );
+          }
+        })
+        .then((data) => {
+          // Extraer datos de temperatura y humedad de la respuesta para Oslo
+          const temperaturaOsloCelsius = kelvinToCelsius(data.main.temp);
+          const humedadOsloRelativa = data.main.humidity;
+
+          // Actualizar los elementos HTML con los datos
+          document.querySelector(".oslo .content-info p.ciudad").textContent =
+            "OSLO";
+          document.querySelector(
+            ".oslo .content-info span.temperatura"
+          ).textContent = temperaturaOsloCelsius.toFixed(2);
+          document.querySelector(
+            ".oslo .content-info span.humedad"
+          ).textContent = humedadOsloRelativa.toFixed(2);
+
+          setGaugeValue(
+            document.querySelector(".oslo .gauge.temperatura"),
+            temperaturaOsloCelsius / 100
+          );
+          setGaugeValue(
+            document.querySelector(".oslo  .gauge.humedad"),
+            humedadOsloRelativa / 100
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      // Realizar una solicitud HTTP GET a la API de OpenWeatherMap para Las Palmas de Gran Canaria
+      fetch(lasPalmasApiUrl)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(
+              "No se pudo obtener la información del tiempo para Las Palmas de Gran Canaria."
+            );
+          }
+        })
+        .then((data) => {
+          // Extraer datos de temperatura y humedad de la respuesta para Las Palmas de Gran Canaria
+          const temperaturaLasPalmasCelsius = kelvinToCelsius(data.main.temp);
+          const humedadLasPalmasRelativa = data.main.humidity;
+
+          // Actualizar los elementos HTML con los datos
+          document.querySelector(
+            ".las-palmas .content-info p.ciudad"
+          ).textContent = "LAS PALMAS";
+          document.querySelector(
+            ".las-palmas .content-info span.temperatura"
+          ).textContent = temperaturaLasPalmasCelsius.toFixed(2);
+          document.querySelector(
+            ".las-palmas .content-info span.humedad"
+          ).textContent = humedadLasPalmasRelativa.toFixed(2);
+          //Gráfico
+
+          setGaugeValue(
+            document.querySelector(".las-palmas .gauge.temperatura"),
+            temperaturaLasPalmasCelsius / 100
+          );
+          setGaugeValue(
+            document.querySelector(".las-palmas  .gauge.humedad"),
+            humedadLasPalmasRelativa / 100
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      function setGaugeValue(gauge, value) {
+        if (value < 0 || value > 1) {
+          return;
+        }
+
+        gauge.querySelector(".gaugefill").style.transform = `rotate(${
+          value / 2
+        }turn)`;
+        gauge.querySelector(".gaugecover").textContent = `${Math.round(
+          value * 100
+        )}°C`;
+      }
+    </script>
+  </body>
+</html>

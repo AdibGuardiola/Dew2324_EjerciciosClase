@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post-it Móvil</title>
+    <style>
+      .post-it {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        font-size: 18px;
+        resize: both;
+        overflow: auto;
+      }
+
+      .red {
+        background-color: #ff8080;
+      }
+
+      .green {
+        background-color: #80ff80;
+      }
+
+      .blue {
+        background-color: #8080ff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="post-it-container" id="postItContainer"></div>
+    <button onclick="crearPostIt()">Crear Post-it</button>
+    <button onclick="borrarPostIts()">Borrar Post-its</button>
+    <input type="file" id="fileInput" accept="image/*" />
+
+    <script>
+      let postId = 1;
+
+      // Cargar post-its desde localStorage al cargar la página
+      window.onload = function () {
+        let savedPostIts = localStorage.getItem("postIts");
+        if (savedPostIts) {
+          document.getElementById("postItContainer").innerHTML = savedPostIts;
+          establecerEventosArrastrar();
+        }
+      };
+
+      // Establecer eventos de arrastrar para los post-its
+      function establecerEventosArrastrar() {
+        let postIts = document.querySelectorAll(".post-it");
+        postIts.forEach((postIt) => {
+          postIt.onmousedown = function (e) {
+            let offsetX = e.clientX - postIt.getBoundingClientRect().left;
+            let offsetY = e.clientY - postIt.getBoundingClientRect().top;
+
+            function onMouseMove(event) {
+              let x = event.clientX - offsetX;
+              let y = event.clientY - offsetY;
+
+              postIt.style.left = x + "px";
+              postIt.style.top = y + "px";
+            }
+
+            function onMouseUp() {
+              document.removeEventListener("mousemove", onMouseMove);
+              document.removeEventListener("mouseup", onMouseUp);
+
+              // Guardar posiciones en localStorage después de soltar el post-it
+              guardarPosiciones();
+            }
+
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+          };
+        });
+      }
+
+      // Guardar posiciones de los post-its en localStorage
+      function guardarPosiciones() {
+        let postItContainer = document.getElementById("postItContainer");
+        localStorage.setItem("postIts", postItContainer.innerHTML);
+      }
+
+      // Crear un nuevo post-it
+      function crearPostIt() {
+        let nuevoPostIt = document.createElement("div");
+        nuevoPostIt.className = "post-it";
+        nuevoPostIt.id = "postIt" + postId;
+        nuevoPostIt.contentEditable = "true"; // Permite la edición de texto
+        nuevoPostIt.innerHTML = "Post-it #" + postId;
+        nuevoPostIt.style.left = "50px";
+        nuevoPostIt.style.top = "50px";
+
+        // Asignar un color aleatorio al post-it
+        let colors = ["red", "green", "blue"];
+        let randomColor = colors[Math.floor(Math.random() * colors.length)];
+        nuevoPostIt.classList.add(randomColor);
+
+        document.getElementById("postItContainer").appendChild(nuevoPostIt);
+
+        // Establecer evento de arrastrar para el nuevo post-it
+        establecerEventosArrastrar();
+
+        // Incrementar el ID para el próximo post-it
+        postId++;
+
+        // Guardar posiciones en localStorage después de crear el post-it
+        guardarPosiciones();
+      }
+
+      // Borrar todos los post-its
+      function borrarPostIts() {
+        document.getElementById("postItContainer").innerHTML = "";
+        // Limpiar localStorage
+        localStorage.removeItem("postIts");
+      }
+
+      // Permitir pegar imágenes en los post-its
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (event) {
+          let file = event.target.files[0];
+          let reader = new FileReader();
+          reader.onload = function (e) {
+            let img = new Image();
+            img.src = e.target.result;
+            img.style.maxWidth = "100%";
+            img.style.maxHeight = "100%";
+            let postId = prompt("En qué post-it quieres pegar la imagen?");
+            let postIt = document.getElementById("postIt" + postId);
+            if (postIt) {
+              postIt.appendChild(img);
+              guardarPosiciones();
+            } else {
+              alert("Post-it no encontrado");
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+    </script>
+  </body>
+</html>

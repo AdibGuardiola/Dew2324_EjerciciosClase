@@ -1,0 +1,141 @@
+@import url("http://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700&amp;display=swap");
+
+:root {
+  --main-color: #2f2721;
+  --primary-color: #d3ad7f;
+  --black: #13131a;
+  --border: 0.1rem solid rgba(255, 255, 255, 0.3);
+}
+section {
+  padding: 2rem 7%;
+}
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: 0.2s linear;
+}
+
+.container {
+  perspective: 1000px;
+  width: 100vw;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  background-size: cover;
+}
+.heading {
+  text-align: center;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-size: 4rem;
+  margin-top: 0;
+}
+
+.carousel {
+  width: 300px;
+  height: 210px;
+  transform-style: preserve-3d;
+}
+
+.carousel__face {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+}
+
+.boton-compra {
+  margin-top: 70px; /* Ajusta el margen superior según sea necesario */
+  text-align: center;
+}
+
+.boton-ovalado {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: blueviolet;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  margin-right: 10px;
+  margin-top: 80px;
+}
+
+.carousel__face span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 80px;
+  color: #080200;
+  font-size: 18px;
+  font-family: "Pacifico", cursive;
+}
+
+.carousel__face:nth-child(1) {
+  background-image: url("images/images3.jpg");
+  background-size: cover;
+  transform: rotateY(0deg) translateZ(450px);
+}
+.carousel__face:nth-child(2) {
+  background-image: url("images/images4.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(40deg) translateZ(450px);
+}
+.carousel__face:nth-child(3) {
+  background-image: url("images/images5.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(80deg) translateZ(450px);
+}
+.carousel__face:nth-child(4) {
+  background-image: url("images/images6.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(120deg) translateZ(450px);
+}
+.carousel__face:nth-child(5) {
+  background-image: url("images/images7.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(160deg) translateZ(450px);
+}
+.carousel__face:nth-child(6) {
+  background-image: url("images/images8.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(200deg) translateZ(450px);
+}
+.carousel__face:nth-child(7) {
+  background-image: url("images/images9.jpg"); /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  background-size: cover;
+  transform: rotateY(240deg) translateZ(450px);
+}
+.carousel__face:nth-child(8) {
+  background-image: url("images/images10.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(280deg) translateZ(450px);
+}
+.carousel__face:nth-child(9) {
+  background-image: url("images/images11.jpg");
+  background-size: cover; /* Reemplaza 'tu-imagen.jpg' con la ruta de tu imagen */
+  transform: rotateY(320deg) translateZ(450px);
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-360deg);
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números cuyas cifras suman cierta cantidad</title>
+</head>
+<body>
+    <h1>Números cuyas cifras suman cierta cantidad</h1>
+
+    <label for="cantidadNumeros">Cantidad de números:</label>
+    <input type="number" id="cantidadNumeros">
+    
+    <label for="sumaCifras">Suma de cifras:</label>
+    <input type="number" id="sumaCifras">
+
+    <button onclick="calcularNumeros()">Calcular</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularNumeros() {
+            const cantidadNumeros = parseInt(document.getElementById("cantidadNumeros").value);
+            const sumaCifras = parseInt(document.getElementById("sumaCifras").value);
+            const numeros = [];
+
+            let numero = 1;
+            while (numeros.length < cantidadNumeros) {
+                if (sumarCifras(numero) === sumaCifras) {
+                    numeros.push(numero);
+                }
+                numero++;
+            }
+
+            // Mostrar los números en el DOM
+            const resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = ""; // Limpiar el contenido previo
+
+            if (numeros.length === 0) {
+                resultadoDiv.textContent = "No se encontraron números que cumplan con la condición.";
+            } else {
+                const resultadoTexto = "Números que suman " + sumaCifras + " en sus cifras: " + numeros.join(", ");
+                resultadoDiv.textContent = resultadoTexto;
+            }
+        }
+
+        function sumarCifras(numero) {
+            return numero.toString().split("").reduce((sum, digit) => sum + parseInt(digit), 0);
+        }
+    </script>
+</body>
+</html>

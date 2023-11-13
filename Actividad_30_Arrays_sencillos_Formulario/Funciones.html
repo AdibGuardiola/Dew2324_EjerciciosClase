@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Datos</title>
+    <link rel="stylesheet" href="Funciones.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="grid">
+        <div class="nombre">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" placeholder="Ingrese un nombre" />
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="puestodetrabajo">
+          <label for="puesto">Puesto de Trabajo:</label>
+          <input
+            type="text"
+            id="puesto"
+            placeholder="Ingrese un puesto de trabajo"
+          />
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="edad">
+          <label for="edad">Edad:</label>
+          <input type="text" id="edad" placeholder="Ingrese edad" />
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="localizacion">
+          <label for="localizacion">Localización:</label>
+          <input
+            type="text"
+            id="localizacion"
+            placeholder="Ingrese una localización"
+          />
+        </div>
+      </div>
+
+      <div class="grid">
+        <button onclick="agregarDatos()">Agregar Datos</button>
+      </div>
+
+      <div class="grid">
+        <button onclick="mostrarDatos()">Mostrar Datos</button>
+      </div>
+
+      <div class="grid">
+        <button onclick="generarArchivo()">Generar Archivo</button>
+      </div>
+
+      <div class="grid">
+        <div class="datos-guardados">
+          <h2>Datos Guardados:</h2>
+          <ul id="lista-datos"></ul>
+        </div>
+      </div>
+    </div>
+    <script src="Funciones.js"></script>
+  </body>
+</html>

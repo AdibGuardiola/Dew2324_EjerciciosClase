@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Activity 5: Objects</title>
+
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+
+      .calc {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-rows: auto;
+      }
+
+      #title {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        font-size: x-large;
+
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+      }
+
+      #display {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        font-size: xx-large;
+        background-color: rgb(37, 36, 36);
+        color: white;
+      }
+
+      #ubC {
+        grid-column-start: 4;
+        grid-column-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 2;
+      }
+
+      #nb0 {
+        grid-column-start: 2;
+        grid-column-end: 2;
+        grid-row-start: 6;
+        grid-row-end: 6;
+      }
+
+      #ob0 {
+        /* suma*/
+
+        grid-column-start: 4;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 3;
+      }
+
+      #ob1 {
+        /* producto*/
+
+        grid-column-start: 4;
+        grid-column-end: 4;
+        grid-row-start: 5;
+        grid-row-end: 5;
+      }
+
+      #ob2 {
+        /* resta*/
+
+        grid-column-start: 4;
+        grid-column-end: 4;
+        grid-row-start: 4;
+        grid-row-end: 4;
+      }
+
+      #ob3 {
+        /* cociente */
+
+        grid-column-start: 4;
+        grid-column-end: 4;
+        grid-row-start: 6;
+        grid-row-end: 6;
+      }
+
+      button {
+        background-color: black;
+        color: white;
+        font-size: large;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Activity 5: Objects</h1>
+    <p>
+      This is classy! Follow the specifications to create some javascript
+      classes:
+    </p>
+    <ul>
+      <li>
+        Create <strong>Window</strong> class:
+        <ul>
+          <li>
+            whose <strong>constructor</strong> will draw a windows (shh! It will
+            be a div don't tell anybody) in the html body, will recieve an
+            object "options" whith the following specification:
+            <ul>
+              <li>width: numeric value meaning the windows width in pixels.</li>
+              <li>
+                height: numeric value meaning the windows height in pixels.
+              </li>
+              <li>
+                posX: numeric value meaning the windows position in pixels
+                regarding the left.
+              </li>
+              <li>
+                posY: numeric value meaning the windows position in pixels
+                regarding the top.
+              </li>
+            </ul>
+          </li>
+          <li>
+            Add the method <strong>setTitle</strong> which receives a string
+            argument and adds it as the title of the window
+          </li>
+          <li>
+            Add the method <strong>setContent</strong> which receives an
+            HTMLElement argument and adds it as the content of the window
+          </li>
+        </ul>
+      </li>
+      <li>
+        Create <strong>Calculator</strong> class:
+        <ul>
+          <li>Calculator inherits from "Window" class.</li>
+          <li>
+            whose <strong>constructor</strong> will receive the same as Windows
+            does but it also inserts a calculator that:
+            <ul>
+              <li>Has a data display.</li>
+              <li>Butons from 0 to 9 and a dot (.) as decimal separator.</li>
+              <li>
+                Buttons for operations: add (+), substract (-), multiply (*),
+                divide (/)
+              </li>
+              <li>Reset button (C)</li>
+              <li>Result button (=)</li>
+            </ul>
+          </li>
+          <li>
+            Add the nessesary code to activate buttons functionality
+            <ul>
+              <li>
+                By pressing a number it is added to the number shown in the
+                display.
+              </li>
+              <li>
+                When pressing an operator button displays cleans and waits for
+                the following data.
+              </li>
+              <li>
+                By pressing the reset button the display cleans and reset all
+                pending operations
+              </li>
+              <li>
+                By pressing the result button the display shows the result of
+                the operations
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Window dragging: add the code you need to drag windows when
+        click-keeping on the title bar until mouse click is released
+      </li>
+    </ul>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      class Window {
+        unit = "px";
+        constructor(options = {}) {
+          this.height = options.height || 150;
+          this.width = options.width || 150;
+          this.top = options.top || 150;
+          this.left = options.left || 150;
+          this.title = document.createElement("div");
+          this.title.setAttribute("id", "title");
+          this.el = document.createElement("div");
+
+          this.el.style.height = this.height + this.unit;
+          this.el.style.width = this.width + this.unit;
+          this.el.style.top = this.height + this.unit;
+          this.el.style.left = this.left + this.unit;
+          this.el.appendChild(this.title);
+        }
+
+        getElement() {
+          return this.el;
+        }
+
+        setContent(content) {
+          this.el.innerHTML = content;
+        }
+
+        getContent() {
+          return this.content;
+        }
+        appendChild(child) {
+          this.el.appendChild(child);
+        }
+
+        setTitle(title) {
+          this.title.innerText = title;
+        }
+      }
+
+      class Calc extends Window {
+        constructor(options = {}) {
+          super(options);
+          this.el.style.position = "absolute";
+          this.el.classList.add("calc");
+          this.storedOperand = 0;
+          this.setDisplay();
+          this.setNumberButtons();
+          this.setDecimalSymbolButton();
+          this.setOperatorsButtons();
+          this.setutilityButtons();
+          this.el.style.backgroundColor = options.backgroundColor;
+        }
+
+        // DISPLAY
+        setDisplay() {
+          var display = document.createElement("input");
+          display.setAttribute("type", "text");
+          display.setAttribute("disabled", "");
+          display.setAttribute("id", "display");
+          display.classList.add("input");
+          display.value = "0";
+          display.style.textAlign = "right";
+          this.display = display;
+          this.appendChild(display);
+        }
+
+        getDisplay() {
+          return this.display;
+        }
+
+        clearDisplay() {
+          this.display.value = "0";
+        }
+
+        //set number buttons
+        setNumberButtons() {
+          var selfInstance = this;
+          for (let index = 0; index < 10; index++) {
+            var numberbutton = document.createElement("button");
+            var attr = {
+              class: "numberButton",
+              id: "nb" + index,
+              type: "button",
+              "data-value": index,
+            };
+            numberbutton.innerText = index;
+            setAttributes(numberbutton, attr);
+            numberbutton.addEventListener("click", function () {
+              selfInstance.numberButtonAction(selfInstance, index);
+            });
+            this.appendChild(numberbutton);
+          }
+        }
+
+        setDecimalSymbolButton() {
+          var selfInstance = this;
+          var symbolButton = document.createElement("button");
+          var symbol = ".";
+          var attr = {
+            class: "symbolButton",
+            id: "sb",
+            type: "button",
+            "data-value": symbol,
+          };
+
+          symbolButton.innerText = symbol;
+          setAttributes(symbolButton, attr);
+          symbolButton.addEventListener("click", function () {
+            selfInstance.decimalButtonAction(selfInstance, symbol);
+          });
+
+          this.appendChild(symbolButton);
+        }
+        setOperatorsButtons() {
+          var selfInstance = this;
+          var operators = [];
+          operators.push("+");
+          operators.push("*");
+          operators.push("-");
+          operators.push("/");
+          operators.push("=");
+
+          for (let index = 0; index < operators.length; index++) {
+            var operatorButton = document.createElement("button");
+            var attr = {
+              class: "operatorButton",
+              id: "ob" + index,
+              type: "button",
+              "data-value": operators[index],
+            };
+            operatorButton.innerText = operators[index];
+            setAttributes(operatorButton, attr);
+            operatorButton.addEventListener("click", function () {
+              selfInstance.operatorButtonAction(selfInstance, operators[index]);
+            });
+            this.appendChild(operatorButton);
+          }
+        }
+
+        setutilityButtons() {
+          var selfInstance = this;
+          var utilityButtons = [];
+
+          //utilityButtons.push("C");
+          utilityButtons.push("C");
+
+          utilityButtons.forEach((element) => {
+            var utilityButton = document.createElement("button");
+            var attr = {
+              class: "utilityButton",
+              id: "ub" + element,
+              type: "button",
+              "data-value": element,
+            };
+            utilityButton.innerText = element;
+            setAttributes(utilityButton, attr);
+            utilityButton.addEventListener("click", function () {
+              selfInstance.otherButtonAction(selfInstance, element);
+            });
+            this.appendChild(utilityButton);
+          });
+        }
+
+        storeOperand(operand) {
+          this.storedOperand = operand;
+        }
+
+        getOperand() {
+          return this.storedOperand;
+        }
+
+        clearOperand() {
+          this.storedOperand = 0;
+        }
+
+        storeOperator(operator) {
+          this.storedOperator = operator;
+        }
+        getOperator() {
+          return this.storedOperator;
+        }
+        clearOperator() {
+          this.storedOperator = "";
+        }
+
+        numberButtonAction(calcInstance, number) {
+          if (calcInstance.getDisplay().value === "0") {
+            calcInstance.getDisplay().value = number;
+          } else {
+            calcInstance.getDisplay().value += number;
+          }
+        }
+
+        decimalButtonAction(calcInstance, symbol) {
+          if (calcInstance.getDisplay().value.indexOf(symbol, 0) == -1) {
+            calcInstance.getDisplay().value += symbol;
+          }
+        }
+
+        operatorButtonAction(calcInstance, operator) {
+          switch (operator) {
+            case "+":
+            case "*":
+            case "-":
+            case "/":
+              calcInstance.storeOperation(calcInstance, operator);
+              break;
+            case "=":
+              calcInstance.solveOperation(calcInstance);
+              break;
+          }
+        }
+
+        otherButtonAction(calcInstance, other) {
+          switch (other) {
+            case "C":
+              calcInstance.clearDisplay();
+              break;
+            case "CE":
+              calcInstance.clearDisplay();
+              calcInstance.clearOperand();
+              calcInstance.clearOperator();
+              break;
+          }
+        }
+
+        storeOperation(calcInstance, operator) {
+          calcInstance.storeOperand(
+            parseFloat(calcInstance.getDisplay().value)
+          );
+          calcInstance.storeOperator(operator);
+          calcInstance.clearDisplay();
+        }
+
+        solveOperation(calcInstance) {
+          var operand1 = calcInstance.getOperand();
+          var operand2 = parseFloat(calcInstance.getDisplay().value);
+
+          switch (calcInstance.getOperator()) {
+            case "+":
+              calcInstance.getDisplay().value = operand1 + operand2;
+              break;
+            case "*":
+              calcInstance.getDisplay().value = operand1 * operand2;
+              break;
+            case "-":
+              calcInstance.getDisplay().value = operand1 - operand2;
+              break;
+            case "/":
+              calcInstance.getDisplay().value = operand1 / operand2;
+              break;
+          }
+        }
+      }
+
+      //set attributes form map
+
+      function setAttributes(el, attrs) {
+        for (var key in attrs) {
+          el.setAttribute(key, attrs[key]);
+        }
+      }
+      // DRAWABLE
+
+      function dragElement(elmnt) {
+        var pos1 = 0,
+          pos2 = 0,
+          pos3 = 0,
+          pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+          // if present, the header is where you move the DIV from:
+          document.getElementById(elmnt.id + "header").onmousedown =
+            dragMouseDown;
+        } else {
+          // otherwise, move the DIV from anywhere inside the DIV:
+          elmnt.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // get the mouse cursor position at startup:
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          // call a function whenever the cursor moves:
+          document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          // calculate the new cursor position:
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          // set the element's new position:
+          elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+          elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+        }
+
+        function closeDragElement() {
+          // stop moving when mouse button is released:
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+
+      //random color
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      var newCalcButton = document.createElement("button");
+      newCalcButton.innerText = "Nueva calculadora";
+
+      newCalcButton.addEventListener("click", function () {
+        var calc = new Calc({
+          height: 300,
+          width: 300,
+          posX: 500,
+          posY: 600,
+          backgroundColor: getRandomColor(),
+        });
+        calc.setTitle("CALCULADORA");
+        dragElement(calc.el);
+        document.body.append(calc.getElement());
+      });
+
+      document.body.appendChild(newCalcButton);
+    </script>
+  </body>
+</html>

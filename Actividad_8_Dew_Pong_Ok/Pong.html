@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Pong</title>
+    <style>
+        canvas {
+            background-color: black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Pelota
+        const ball = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 10,
+            speed: 5,
+            dx: 5,
+            dy: 5,
+        };
+
+        // Paletas
+        const paddleWidth = 10, paddleHeight = 100;
+        const leftPaddle = {
+            x: 0,
+            y: canvas.height / 2 - paddleHeight / 2,
+            width: paddleWidth,
+            height: paddleHeight,
+            dy: 5,
+            upPressed: false,
+            downPressed: false,
+        };
+        const rightPaddle = {
+            x: canvas.width - paddleWidth,
+            y: canvas.height / 2 - paddleHeight / 2,
+            width: paddleWidth,
+            height: paddleHeight,
+            dy: 5,
+            upPressed: false,
+            downPressed: false,
+        };
+
+        // Puntuación
+        let playerScore = 0;
+        let computerScore = 0;
+
+        // Dibuja la pelota
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "white";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Dibuja las paletas
+        function drawPaddles() {
+            ctx.fillStyle = "white";
+            ctx.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
+            ctx.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+        }
+
+        // Dibuja la puntuación
+        function drawScore() {
+            ctx.font = "30px Arial";
+            ctx.fillText(playerScore + " - " + computerScore, canvas.width / 2 - 30, 30);
+        }
+
+        // Colisión con las paletas
+        function paddleCollision() {
+            if (
+                ball.x - ball.radius < leftPaddle.x + leftPaddle.width &&
+                ball.x + ball.radius > leftPaddle.x &&
+                ball.y + ball.radius > leftPaddle.y &&
+                ball.y - ball.radius < leftPaddle.y + leftPaddle.height
+            ) {
+                ball.dx = -ball.dx;
+            }
+
+            if (
+                ball.x - ball.radius < rightPaddle.x + rightPaddle.width &&
+                ball.x + ball.radius > rightPaddle.x &&
+                ball.y + ball.radius > rightPaddle.y &&
+                ball.y - ball.radius < rightPaddle.y + rightPaddle.height
+            ) {
+                ball.dx = -ball.dx;
+            }
+        }
+
+        // Actualiza la posición de las paletas
+        function updatePaddles() {
+            if (leftPaddle.upPressed && leftPaddle.y > 0) {
+                leftPaddle.y -= leftPaddle.dy;
+            } else if (leftPaddle.downPressed && leftPaddle.y + leftPaddle.height < canvas.height) {
+                leftPaddle.y += leftPaddle.dy;
+            }
+
+            if (rightPaddle.upPressed && rightPaddle.y > 0) {
+                rightPaddle.y -= rightPaddle.dy;
+            } else if (rightPaddle.downPressed && rightPaddle.y + rightPaddle.height < canvas.height) {
+                rightPaddle.y += rightPaddle.dy;
+            }
+        }
+
+        // Mueve la pelota y verifica colisiones
+        function updateBall() {
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Colisión con los bordes superior e inferior
+            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+                ball.dy = -ball.dy;
+            }
+
+            // Colisión con las paletas
+            paddleCollision();
+
+            // Punto para el jugador de la izquierda
+            if (ball.x - ball.radius < 0) {
+                computerScore++;
+                resetBall();
+            }
+
+            // Punto para el jugador de la derecha
+            if (ball.x + ball.radius > canvas.width) {
+                playerScore++;
+                resetBall();
+            }
+        }
+
+        // Reinicia la posición de la pelota
+        function resetBall() {
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.dx = 5;
+            ball.dy = 5;
+        }
+
+        // Dibuja todo en el lienzo
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBall();
+            drawPaddles();
+            drawScore();
+            updateBall();
+            updatePaddles();
+            requestAnimationFrame(draw);
+        }
+
+        // Eventos de teclado para las paletas
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowUp") {
+                rightPaddle.upPressed = true;
+            }
+            if (e.key === "ArrowDown") {
+                rightPaddle.downPressed = true;
+            }
+            if (e.key === "w") {
+                leftPaddle.upPressed = true;
+            }
+            if (e.key === "s") {
+                leftPaddle.downPressed = true;
+            }
+        });
+
+        document.addEventListener("keyup", (e) => {
+            if (e.key === "ArrowUp") {
+                rightPaddle.upPressed = false;
+            }
+            if (e.key === "ArrowDown") {
+                rightPaddle.downPressed = false;
+            }
+            if (e.key === "w") {
+                leftPaddle.upPressed = false;
+            }
+            if (e.key === "s") {
+                leftPaddle.downPressed = false;
+            }
+        });
+
+        // Iniciar el juego
+        draw();
+    </script>
+</body>
+</html>
