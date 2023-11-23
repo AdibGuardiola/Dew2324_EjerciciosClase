@@ -1,0 +1,84 @@
+{
+    "Talleres": [
+      {
+        "nombre": "Taller Automotriz XYZ",
+        "tiposreparacion": "Mecánica general-Reparación de motores-Sistemas eléctricos",        
+        "cilindrada": "Motor de hasta 110cv",
+        "tipocombustible": "Diesel",
+        "anofabricacion": 2009,
+        "Especilistasentecnologia": "Alemana"
+      },
+      {
+        "nombre": "Taller Autos Eléctricos ABC",
+        "tiposreparacion":"Sistemas eléctricos-Baterias-componentes electrónicos",
+        "cilindrada": "Motor de hasta 230cv",
+        "tipocombustible": "Hibrido",
+        "anofabricacion": 2006,
+        "Especilistasentecnologia": "Francesa"
+      },
+      {
+        "nombre": "Garage EuroTech",
+        "tiposreparacion":"Reparación de sistemas eléctricos-Mantenimiento de transmisiones-Revisión de suspensión",
+        "cilindrada": "Motor de hasta 110cv",
+        "tipocombustible": "Gasolina",
+        "anofabricacion": 2008,
+        "Especilistasentecnologia": "Japonesa"
+      },
+      {
+        "nombre": "Taller Carros Rápidos-tipos de reparacion: Tuning de motores-Reparación de chasis-Personalización de carroceria",
+        "cilindrada": "Motor de hasta 110cv",
+        "tipocombustible": "Gasolina",
+        "anofabricacion": 2009,
+        "Especilistasentecnologia": "Alemana"
+      },
+      {
+        "nombre": "Taller de Reparación Franco- Reparación de sistemas de inyección-Revisión de neumáticos-Mantenimiento de dirección",
+        "cilindrada": "Motor de hasta 110cv",
+        "tipocombustible": "GLP",
+        "anofabricacion": 2008,
+        "Especilistasentecnologia": "Francesa"
+      },
+      {
+        "nombre": "Garaje Italiano",
+        "tiposreparacion": "Ajuste de frenos ABS-Reparación de sistemas de escape-Mantenimiento de climatización",
+        "cilindrada": "Motor de hasta 340cv",
+        "tipocombustible": "Diesel",
+        "anofabricacion": 2015,
+        "Especilistasentecnologia": "Francesa"
+      },
+      
+      {
+        "nombre": "Taller Avanzado de Motores",
+        "tiposreparacion": "Diagnóstico avanzado-Reparación de sistemas de dirección-Reemplazo de sistemas de climatización",
+        "cilindrada": "Motor de hasta 230cv",
+        "tipocombustible": "Diesel",
+        "anofabricacion": 2017,
+        "Especilistasentecnologia": "Inglesa"
+      },
+      {
+        "nombre": "Taller EléctricoTech",
+        "tiposreparacion": "Reparación de baterias eléctricas-Sistemas de carga-Actualización de software",       
+        "cilindrada": "Motor de hasta 110cv",
+        "tipocombustible": "Electrico",
+        "anofabricacion": 2014,
+        "Especilistasentecnologia": "Italina"
+      },
+      {
+        "nombre": "Taller de Automóviles Solar",
+        "tiposreparacion": "Paneles solares para autos-Reparación de sistemas solares-Mantenimiento de autos ecológicos",
+        "cilindrada": "Motor de hasta 110cv",
+        "tipocombustible": "Electrico",
+        "anofabricacion": 2011,
+        "Especilistasentecnologia": "Alemana"
+      },
+      {
+        "nombre": "Taller Monroy",
+        "tiposreparacion": "Paneles solares para autos-Reparación de sistemas solares-Mantenimiento de autos ecológicos",
+        "cilindrada": "Motor de hasta 340cv",
+        "tipocombustible": "Diesel",
+        "anofabricacion": 2009,
+        "Especilistasentecnologia": "Alemana"
+      }
+    ]
+  }
+  

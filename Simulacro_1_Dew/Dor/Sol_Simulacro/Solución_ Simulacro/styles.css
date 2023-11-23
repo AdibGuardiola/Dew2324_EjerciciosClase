@@ -1,0 +1,140 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: black;
+}
+
+.container {
+  position: relative;
+  height: 300px;
+  width: 320px;
+  margin: 100px auto 0 auto;
+  perspective: 1000px;
+}
+
+.carousel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotate360 60s infinite forwards linear;
+}
+
+.cuadrado {
+  width: 280px;
+  height: 380px;
+  position: absolute;
+  transform-origin: center;
+  transition: transform 0.7s ease-in-out;
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-size: cover;
+}
+
+/* Asigna imágenes a .front y .back para cada .cuadrado */
+.cuadrado:nth-child(1) .front {
+  background-image: url("1.jpg");
+ 
+}
+.cuadrado:nth-child(1) .back {
+  background-image: url("7.jpg");
+  transform: rotateY(180deg);
+}
+.cuadrado:nth-child(2) .front {
+  background-image: url("2.jpg");
+  
+}
+.cuadrado:nth-child(2) .back {
+  background-image: url("8.jpg");
+  transform: rotateY(180deg);
+}
+.cuadrado:nth-child(3) .front {
+  background-image: url("3.jpg");
+ 
+}
+.cuadrado:nth-child(3) .back {
+  background-image: url("9.jpg");
+  transform: rotateY(180deg);
+}
+.cuadrado:nth-child(4) .front {
+  background-image: url("4.jpg");
+}
+.cuadrado:nth-child(4) .back {
+  background-image: url("10.jpg");
+  transform: rotateY(180deg);
+}
+.cuadrado:nth-child(5) .front {
+  background-image: url("5.jpg");
+  
+}
+.cuadrado:nth-child(5) .back {
+  background-image: url("11.jpg");
+  transform: rotateY(180deg);
+}
+.cuadrado:nth-child(6) .front {
+  background-image: url("6.jpg");
+  
+}
+.cuadrado:nth-child(6) .back {
+  background-image: url("12.jpg");
+  transform: rotateY(180deg);
+}
+
+/* Animación al pasar el ratón por encima */
+.cuadrado:hover {
+  transform: translateZ(450px);
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+.cuadrado:nth-child(1) {
+  transform: rotateY(0deg) translateZ(430px);
+}
+.cuadrado:nth-child(2) {
+  transform: rotateY(60deg) translateZ(430px);
+}
+.cuadrado:nth-child(3) {
+  transform: rotateY(120deg) translateZ(430px);
+}
+.cuadrado:nth-child(4) {
+  transform: rotateY(180deg) translateZ(430px);
+}
+.cuadrado:nth-child(5) {
+  transform: rotateY(240deg) translateZ(430px);
+}
+.cuadrado:nth-child(6) {
+  transform: rotateY(300deg) translateZ(430px);
+}
+.cuadrado {
+    transform-style: preserve-3d;
+  }
+  
+
+  
+  /* Animación al pasar el ratón por encima para girar y desplazar el cuadrado */
+  .cuadrado:hover {
+    transform: translateZ(-100px) rotateY(-180deg);
+  }
+  @keyframes rotate360 {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(-360deg);
+    }
+  }

@@ -1,0 +1,203 @@
+[
+    {
+      "Nombre": "María García",
+      "Cargo": "Jefa de Equipo",
+      "Tipo de Titulación": "Licenciatura en Administración de Empresas",
+      "Categoría": "Junior",
+      "Localidad": "Madrid",
+      "Código Postal": "28001",
+      "Edad": "32 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Juan Rodríguez",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Ingeniería en Informática",
+      "Categoría": "Senior",
+      "Localidad": "Barcelona",
+      "Código Postal": "08015",
+      "Edad": "38 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Ana Martínez",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Psicología Organizacional",
+      "Categoría": "Senior",
+      "Localidad": "Valencia",
+      "Código Postal": "46002",
+      "Edad": "39 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Luis Sánchez",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Ingeniería Civil",
+      "Categoría": "Senior",
+      "Localidad": "Sevilla",
+      "Código Postal": "41001",
+      "Edad": "26 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Carmen López",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Marketing y Publicidad",
+      "Categoría": "Senior",
+      "Localidad": "Zaragoza",
+      "Código Postal": "50001",
+      "Edad": "38 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Javier Fernández",
+      "Cargo": "Jefe de Equipo",
+      "Tipo de Titulación": "Ingeniería Eléctrica",
+      "Categoría": "Senior",
+      "Localidad": "Bilbao",
+      "Código Postal": "48002",
+      "Edad": "34 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Laura Gómez",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Comunicación Audiovisual",
+      "Categoría": "Junior",
+      "Localidad": "Málaga",
+      "Código Postal": "29001",
+      "Edad": "22 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Sergio Martín",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Economía",
+      "Categoría": "Senior",
+      "Localidad": "Pamplona",
+      "Código Postal": "31001",
+      "Edad": "37 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Patricia Ruiz",
+      "Cargo": "Jefa de Equipo",
+      "Tipo de Titulación": "Recursos Humanos",
+      "Categoría": "Senior",
+      "Localidad": "A Coruña",
+      "Código Postal": "15001",
+      "Edad": "27 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Diego Torres",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Ciencias de la Computación",
+      "Categoría": "Junior",
+      "Localidad": "Valladolid",
+      "Código Postal": "47001",
+      "Edad": "48 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Marta Jiménez",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Estadística",
+      "Categoría": "Junior",
+      "Localidad": "Granada",
+      "Código Postal": "18001",
+      "Edad": "30 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Andrés Torres",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Ingeniería de Software",
+      "Categoría": "Senior",
+      "Localidad": "Córdoba",
+      "Código Postal": "14001",
+      "Edad": "33 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Isabel García",
+      "Cargo": "Jefa de Equipo",
+      "Tipo de Titulación": "Dirección de Proyectos",
+      "Categoría": "Senior",
+      "Localidad": "Salamanca",
+      "Código Postal": "37001",
+      "Edad": "36 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Hugo Martínez",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Economía",
+      "Categoría": "Senior",
+      "Localidad": "Zaragoza",
+      "Código Postal": "50002",
+      "Edad": "29 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Carla Soto",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Ingeniería Informática",
+      "Categoría": "Junior",
+      "Localidad": "Barcelona",
+      "Código Postal": "08020",
+      "Edad": "31 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Raúl Díaz",
+      "Cargo": "Jefe de Equipo",
+      "Tipo de Titulación": "Dirección de Recursos Humanos",
+      "Categoría": "Senior",
+      "Localidad": "Valencia",
+      "Código Postal": "46003",
+      "Edad": "39 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Carolina Pérez",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Psicología",
+      "Categoría": "Senior",
+      "Localidad": "Madrid",
+      "Código Postal": "28010",
+      "Edad": "27 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Pedro Nuñez",
+      "Cargo": "Desarrollador",
+      "Tipo de Titulación": "Ingeniería en Sistemas",
+      "Categoría": "Senior",
+      "Localidad": "Sevilla",
+      "Código Postal": "41002",
+      "Edad": "35 años",
+      "Tipo de Trabajo": "Local"
+    },
+    {
+      "Nombre": "Alba Fernández",
+      "Cargo": "Jefa de Equipo",
+      "Tipo de Titulación": "Dirección de Marketing",
+      "Categoría": "Junior",
+      "Localidad": "Bilbao",
+      "Código Postal": "48003",
+      "Edad": "37 años",
+      "Tipo de Trabajo": "Remoto"
+    },
+    {
+      "Nombre": "Alejandro Ruiz",
+      "Cargo": "Analista",
+      "Tipo de Titulación": "Ciencias de Datos",
+      "Categoría": "Senior",
+      "Localidad": "A Coruña",
+      "Código Postal": "15002",
+      "Edad": "32 años",
+      "Tipo de Trabajo": "Local"
+    }
+  ]
+  

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reunión de encuentro</title>
+    <style>
+      /* Estilos para los contenedores de resultados */
+      #resultado {
+        background-color: red;
+        padding: 10px;
+        margin-top: 20px;
+        color: white;
+      }
+
+      #resultadoEdad {
+        background-color: green;
+        padding: 10px;
+        margin-top: 20px;
+        color: white;
+      }
+
+      /* Estilo específico para los empleados Junior menores de 30 años en resultadoEdad */
+      #resultadoEdad .juniorMenor25 {
+        color: black;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Reunión de encuentro</h2>
+
+    <!-- Primera solicitud -->
+    <form id="encuentroForm">
+      <label for="cargo">Cargo:</label>
+      <select id="cargo" name="cargo">
+        <option value="">Selecciona un cargo</option>
+        <option value="Jefa de Equipo">Jefa de Equipo</option>
+        <option value="Desarrollador">Desarrollador</option>
+        <option value="Analista">Analista</option>
+      </select>
+
+      <label for="categoria">Categoría:</label>
+      <select id="categoria" name="categoria">
+        <option value="">Selecciona una categoría</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+      </select>
+
+      <label for="tipoTrabajo">Tipo de Trabajo:</label>
+      <select id="tipoTrabajo" name="tipoTrabajo">
+        <option value="">Selecciona un tipo de trabajo</option>
+        <option value="Local">Local</option>
+        <option value="Remoto">Remoto</option>
+      </select>
+
+      <button type="button" onclick="mostrarPersonasSeleccionadas()">
+        Personas seleccionadas
+      </button>
+    </form>
+
+    <!-- Segunda solicitud -->
+    <form id="edadCategoriaForm">
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad" min="0" />
+
+      <label for="categoriaEdad">Categoría:</label>
+      <select id="categoriaEdad" name="categoriaEdad">
+        <option value="">Selecciona una categoría</option>
+        <option value="Junior">Junior</option>
+        <option value="Senior">Senior</option>
+      </select>
+
+      <button type="button" onclick="mostrarEmpleadosMenores()">
+        Personas por Edad y Categoría
+      </button>
+    </form>
+
+    <!-- Contenedor de resultado para la primera solicitud -->
+    <div id="resultado"></div>
+
+    <!-- Contenedor de resultado para la segunda solicitud -->
+    <div id="resultadoEdad"></div>
+
+    <!-- Incluir el archivo JavaScript -->
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+  </body>
+</html>
